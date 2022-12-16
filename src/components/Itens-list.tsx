@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import ItemService from "../services/ItemService";
 import IItem from "../types/IItem";
 import Item from "./Item";
+import Loading from "./Loading";
 
 const ItensList = () => {
   const { listaId } = useParams();
@@ -51,7 +52,7 @@ const ItensList = () => {
   return (
     <div>
       {isLoading ? (
-        <h1>Carregando</h1>
+        <Loading />
       ) : (
         <div className="list row mt-5">
           <div className="col-md-5 mx-5">
