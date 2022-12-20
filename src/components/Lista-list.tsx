@@ -60,7 +60,7 @@ const ListaList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {listas ? (
+                  {listas.length > 0  ? (
                     listas.map((lista: ILista) => (
                       <tr>
                         <td>{lista.titulo}</td>

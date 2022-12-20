@@ -22,8 +22,7 @@ const Lista = () => {
       .then((response) => {
         setLista(response.data);
       })
-      .catch((erro) => {
-        console.log(erro);
+      .catch(() => {
         setErro(true);
         setMensagemErro(
           "Falha ao encontrar a lista, por favor tente novamente mais tarde!"
@@ -51,8 +50,7 @@ const Lista = () => {
         setSucesso(true);
         setMensagemSucesso("Lista atualizado com sucesso!");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         setErro(true);
         setMensagemErro(
           "Falha ao atualizar a lista, por faver tente novamente mais tarde!"

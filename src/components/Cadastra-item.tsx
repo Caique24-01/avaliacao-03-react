@@ -22,6 +22,9 @@ const CadastraItem = () => {
     const data: IItem = {
       titulo: titulo,
       concluido: false,
+      lista: {
+        titulo: ""
+      }
     };
     
     setIsLoanding(true)

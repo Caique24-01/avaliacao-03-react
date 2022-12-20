@@ -22,6 +22,7 @@ const Item = (ItemProps: IItem) => {
       id: ItemProps.id,
       titulo: ItemProps.titulo,
       concluido: ItemProps.concluido,
+      lista: ItemProps.lista
     };
     setItem(data);
   }, [listaId, ItemProps]);
@@ -33,6 +34,7 @@ const Item = (ItemProps: IItem) => {
       id: item.id,
       titulo: titulo,
       concluido: item.concluido,
+      lista: ItemProps.lista
     };
 
     setItem(data);
@@ -118,7 +120,7 @@ const Item = (ItemProps: IItem) => {
               <div className="d-flex justify-content-center">
                 <button
                   className="btn btn-outline-primary px-5"
-                  onClick={() => navigate("/listas")}
+                  onClick={() => navigate(`/listas`)}
                 >
                   Ok
                 </button>
@@ -188,7 +190,7 @@ const Item = (ItemProps: IItem) => {
               ) : (
                 <div>
                   <br />
-                  <p>Por favor selecione uma lista...</p>
+                  <p>Por favor selecione um item...</p>
                 </div>
               )}
             </div>

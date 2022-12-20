@@ -24,7 +24,6 @@ const ItensList = () => {
         setItens(response.data);
       })
       .catch((e) => {
-        console.log(e);
         setErro(true);
         setMensagemErro(
           "Falha ao carregar itens, por favor tente novamente mais tarde!"
@@ -40,6 +39,7 @@ const ItensList = () => {
       id: item.id,
       titulo: item.titulo,
       concluido: item.concluido,
+      lista: item.lista
     };
     setSelecionado(data);
     setEditar(false);
@@ -102,7 +102,7 @@ const ItensList = () => {
                   <Item {...selecionado} />
                 ) : (
                   <div>
-                    <h4 className="d-flex justify-content-center m-4">Itens</h4>
+                    <h4 className="d-flex justify-content-center m-4">Item</h4>
                     <div className="d-flex justify-content-center mb-5">
                       <div className="row row-cols-2">
                         <label>
