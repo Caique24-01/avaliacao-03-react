@@ -1,11 +1,11 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import { Routes as Switch, Route } from "react-router-dom";
-import ListaList from "./components/Lista-list";
-import Lista from "./components/Lista";
-import CadastraLista from "./components/Cadastra-lista";
-import ItensList from "./components/Itens-list";
-import CadastraItem from "./components/Cadastra-item";
+import ListaList from "./screen/Lista-list";
+import Lista from "./screen/Lista";
+import CadastraLista from "./screen/Cadastra-lista";
+import ItensList from "./screen/Itens-list";
+import CadastraItem from "./screen/Cadastra-item";
 import Header from "./components/Header";
 
 function App() {

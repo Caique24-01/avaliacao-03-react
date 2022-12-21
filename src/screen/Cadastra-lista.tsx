@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListaService from "../services/ListaService";
 import ILista from "../types/ILista";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 const CadastraLista = () => {
   const [titulo, setTitulo] = useState("");

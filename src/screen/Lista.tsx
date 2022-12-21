@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import ListaService from "../services/ListaService";
 import ILista from "../types/ILista";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 const Lista = () => {
   const [lista, setLista] = useState<ILista>();

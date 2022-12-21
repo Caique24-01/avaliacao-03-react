@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ItemService from "../services/ItemService";
 import IItem from "../types/IItem";
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 const Item = (ItemProps: IItem) => {
   const { listaId } = useParams();
