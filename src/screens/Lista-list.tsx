@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ListaService from "../services/ListaService";
 import ILista from "../types/ILista";
 import Loading from "../components/Loading";
+import { ListaContext } from "../contexts/ListaContext";
 
 const ListaList = () => {
   const [listas, setListas] = useState<ILista[]>([]);
@@ -10,6 +11,7 @@ const ListaList = () => {
   const [mensagemErro, setMensagemErro] = useState<string>("");
   const [isLoading, setIsLoanding] = useState(false);
 
+  const {setListaContexto} = useContext(ListaContext)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -28,6 +30,11 @@ const ListaList = () => {
         setIsLoanding(false);
       });
   }, []);
+
+  function getItens(lista: ILista) {
+    setListaContexto(lista)
+    navigate(`/listas/${lista.id}/itens`)
+  }
 
   return (
     <div className="m-5">
@@ -77,7 +84,7 @@ const ListaList = () => {
                           <button
                             className="btn btn-outline-success mx-4"
                             onClick={() => {
-                              navigate(`/listas/${lista.id}/itens`);
+                              getItens(lista);
                             }}
                           >
                             <i className="bi bi-list-ol pe-2"></i>

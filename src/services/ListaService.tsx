@@ -1,4 +1,4 @@
-import api from "../api";
+import api from "../api/api";
 import ILista from "../types/ILista";
 
 class ListaService{
