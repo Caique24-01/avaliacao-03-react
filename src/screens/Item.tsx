@@ -4,6 +4,9 @@ import ItemService from "../services/ItemService";
 import IItem from "../types/IItem";
 import Loading from "../components/Loading";
 import { ItemContext } from "../contexts/ItemContext";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+
 
 const Item = () => {
   const { listaId } = useParams();
@@ -13,9 +16,12 @@ const Item = () => {
   const [sucesso, setSucesso] = useState<boolean>(false);
   const [mensagemSucesso, setMensagemSucesso] = useState<string>("");
 
-  
   const [isLoading, setIsLoanding] = useState(false);
-  const { itemContexto } = useContext(ItemContext)
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const { itemContexto } = useContext(ItemContext);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,7 +29,7 @@ const Item = () => {
       id: itemContexto.id,
       titulo: itemContexto.titulo,
       concluido: itemContexto.concluido,
-      lista: itemContexto.lista
+      lista: itemContexto.lista,
     };
     setItem(data);
   }, [listaId, itemContexto]);
@@ -35,14 +41,14 @@ const Item = () => {
       id: item.id,
       titulo: titulo,
       concluido: item.concluido,
-      lista: itemContexto.lista
+      lista: itemContexto.lista,
     };
 
     setItem(data);
   }
 
   function update() {
-    setIsLoanding(true)
+    setIsLoanding(true);
     ItemService.update(listaId as string, item as IItem, item?.id as number)
       .then(() => {
         setSucesso(true);
@@ -60,7 +66,7 @@ const Item = () => {
   }
 
   function remove() {
-    setIsLoanding(true)
+    setIsLoanding(true);
     ItemService.delete(item?.id as number)
       .then(() => {
         setSucesso(true);
@@ -74,7 +80,6 @@ const Item = () => {
         setIsLoanding(false);
       });
   }
-
 
   return (
     <div className="mt-5">
@@ -133,7 +138,9 @@ const Item = () => {
                             className="form-control"
                             id="title"
                             value={item?.titulo}
-                            onChange={(e) => onChangeTitulo(e.target.value, item as IItem)}
+                            onChange={(e) =>
+                              onChangeTitulo(e.target.value, item as IItem)
+                            }
                           />
                         </div>
                       </form>
@@ -155,10 +162,33 @@ const Item = () => {
                         </button>
                         <button
                           className="m-3 btn btn-md btn-danger"
-                          onClick={() => remove()}
+                          onClick={handleShow}
                         >
                           Delete
                         </button>
+
+                        <Modal
+                          size="sm"
+                          show={show}
+                          onHide={handleClose}
+                          backdrop="static"
+                          keyboard={false}
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>Excluir item</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            Tem certeza que deseja excluir este item ?
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                              Fechar
+                            </Button>
+                            <Button variant="danger" onClick={remove}>
+                              Excluir
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                       </div>
                     ) : (
                       <div>

@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import ListaService from "../services/ListaService";
 import ILista from "../types/ILista";
 import Loading from "../components/Loading";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 const Lista = () => {
   const [lista, setLista] = useState<ILista>();
@@ -11,6 +13,11 @@ const Lista = () => {
   const [mensagemErro, setMensagemErro] = useState<string>("");
   const [sucesso, setSucesso] = useState<boolean>(false);
   const [mensagemSucesso, setMensagemSucesso] = useState<string>("");
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [isLoading, setIsLoanding] = useState(false);
 
@@ -44,7 +51,7 @@ const Lista = () => {
   }
 
   function update() {
-    setIsLoanding(true)
+    setIsLoanding(true);
     ListaService.update(id as string, lista as ILista)
       .then(() => {
         setSucesso(true);
@@ -62,7 +69,7 @@ const Lista = () => {
   }
 
   function remove() {
-    setIsLoanding(true)
+    setIsLoanding(true);
     ListaService.delete(id as string)
       .then(() => {
         setSucesso(true);
@@ -158,10 +165,33 @@ const Lista = () => {
                         </button>
                         <button
                           className="m-3 btn btn-md btn-danger"
-                          onClick={() => remove()}
+                          onClick={handleShow}
                         >
                           Delete
                         </button>
+
+                        <Modal
+                          size="sm"
+                          show={show}
+                          onHide={handleClose}
+                          backdrop="static"
+                          keyboard={false}
+                        >
+                          <Modal.Header closeButton>
+                            <Modal.Title>Excluir lista</Modal.Title>
+                          </Modal.Header>
+                          <Modal.Body>
+                            Tem certeza que deseja excluir está lista ?
+                          </Modal.Body>
+                          <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                              Fechar
+                            </Button>
+                            <Button variant="danger" onClick={remove}>
+                              Excluir
+                            </Button>
+                          </Modal.Footer>
+                        </Modal>
                       </div>
                     ) : (
                       <div>
